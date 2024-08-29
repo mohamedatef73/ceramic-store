@@ -83,7 +83,6 @@ const Footer = () => {
             Besnik Creative Agency.
           </div>
           <div className="logo-icon flex items-center mt-2 md:mt-0">
-            <img src="./svg/Group (1).svg" className="w-9" alt="logo" />
             <h1 className="text-white font-semibold ml-2">Netbook</h1>
           </div>
         </div>

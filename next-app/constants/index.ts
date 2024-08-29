@@ -1,6 +1,6 @@
 // NAVIGATION
 export const NAV_LINKS = [
-  { href: "../pages/porcelain", key: "home", label: "البورسلين" },
+  { href: "./pages/porcelain", key: "home", label: "البورسلين" },
   { href: "./porcelain.tsx", key: "how_hilink_work", label: "بلاط XXL" },
   { href: "./ceramic.tsx", key: "services", label: "السيراميك" },
   { href: "/", key: "pricing ", label: "الادوات الصحية" },

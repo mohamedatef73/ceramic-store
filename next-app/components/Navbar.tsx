@@ -19,7 +19,7 @@ const Navbar = () => {
       </Link>
       <ul className={`lg:flex ${isMenuOpen ? 'block' : 'hidden'} h-full gap-12`}>
         <li className="regular-16 text-gray-50 flexCenter cursor-pointer pb1.5 transition-all hover:font-bold">
-          <Link href="/Home">Home</Link>
+          <Link href="/">Home</Link>
         </li>
         <li className="regular-16 text-gray-50 flexCenter cursor-pointer pb1.5 transition-all hover:font-bold">
           <Link href="/porcelain">porcelain</Link>
