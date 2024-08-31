@@ -1,6 +1,6 @@
-// interfaces/Pokemon.ts
+// // interfaces/Pokemon.tsz
 
-export interface Pokemon {
-  name: string
-  url: string
-}
+// export interface Pokemon {
+//   name: string
+//   url: string
+// }
