@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RootLayout from '../app/layout';
 
 const CartPage = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([
+  const [cartItems, setCartItems] = useState([
     { id: 1, name: 'Porcelain bathroom', quantity: 2, price: 45, image: '/ceramic1.jpg' },
     { id: 2, name: 'Ceramic ketchin', quantity: 1, price: 20, image: '/ceramic2.jpg' },
     { id: 3, name: 'ceramic bathroom', quantity: 3, price: 10, image: '/ceramic3.jpg' },
