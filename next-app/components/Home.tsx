@@ -4,7 +4,14 @@ import { useState } from "react"
 const Home: React.FC = () => {
   const [toggle, setToggle] = useState(false)
 
-  console.log("home page")
+  document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I')) {
+        e.preventDefault();
+    }
+}, false);
 
   return (
     <div
