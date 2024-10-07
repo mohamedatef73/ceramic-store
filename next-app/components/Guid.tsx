@@ -1,100 +1,113 @@
-import React from "react";
-import Button from "./Button";
+'use client';
 
-const Guid = () => {
-  return (
-    <section className="flex  border-b py-8">
-      <div className=" flex flex-col w-full ">
-        <h2 className="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-          اكتشف الانطباعات الملهمة
-        </h2>
-        <div className="w-full mb-4">
-          <div className="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-        </div>
+import Image from 'next/image';
+import { useState } from 'react';
 
-        <div className="flex flex-col w-screen py-10   lg:py-10 xl:flex-row">
-          <div className="flex w-full justify-center p-4 xl:p-6">
-            <img src="/porcelain4.jpg" className="w-full" alt="" />
-          </div>
+import { useRouter } from 'next/navigation';
 
-          <div className="w-full xl:w-2/3 p-4 xl:p-6 flex flex-col items-center justify-center">
-            <h3 className="text-3xl text-center xl:text-right text-gray-800 font-bold leading-none mb-3">
-              بلاط البورسلين. انطباعات متميزة على الأسطح.
-            </h3>
-            <div className="rtl flex flex-col w-full text-gray-600 text-center xl:text-right mb-4">
-              تخيّل منتجاتك مباشرة في منزلك! اختر بنقرة واحدة السطح الذي ترغب في
-              تصميمه للأرضيات والحوائط. جرّب الآن مصمم الغرفة في
-              Cleopatraceramics.store
-            </div>
-            <div className="flex flex-col w-full justify-center gap-3 sm:flex-row">
-              <Button type="button" title="اكتشف من هنا" variant="btn_green" />
-            </div>
-          </div>
-        </div>
+export default function Home() {
+  const router = useRouter();
 
-        <div className="rtl flex flex-col w-screen py-10 lg:py-10 xl:flex-row">
-          <div className="flex w-full justify-center p-4 xl:p-6">
-            <img src="/porcelain4.jpg" className="w-full" alt="" />
-          </div>
+  const handleNavigate = (route: string) => {
+    router.push(route);
+  };
+  const [hoveredButton, setHoveredButton] = useState(null);
+    
+  const handleMouseEnter = (buttonId) => {
+    setHoveredButton(buttonId);
+  };
 
-          <div className="w-full xl:w-2/3 p-4 xl:p-6 flex flex-col items-center justify-center">
-            <h3 className="text-3xl text-center xl:text-right text-gray-800 font-bold leading-none mb-3">
-              بلاط البورسلين. انطباعات متميزة على الأسطح.
-            </h3>
-            <div className="rtl flex flex-col w-full text-gray-600 text-center xl:text-right mb-4">
-              تخيّل منتجاتك مباشرة في منزلك! اختر بنقرة واحدة السطح الذي ترغب في
-              تصميمه للأرضيات والحوائط. جرّب الآن مصمم الغرفة في
-              Cleopatraceramics.store
-            </div>
-            <div className="flex flex-col w-full justify-center gap-3 sm:flex-row">
-              <Button type="button" title="اكتشف من هنا" variant="btn_green" />
-            </div>
+  const handleMouseLeave = () => {
+    setHoveredButton(null);
+  };
+
+
+    
+      return (
+        <div className="grid grid-cols-2 grid-rows-2 gap-4 w-90 h-screen m-4">
+        {/* First Image Div with Button */}
+        <div className="relative w-full h-full bg-gray-200 rounded-lg overflow-hidden group">
+          <Image
+            src="/porcelain2.jpg"
+            alt="Ceramic 1"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg transition duration-300 ease-in-out group-hover:opacity-75"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center transition duration-300 ease-in-out group-hover:bg-teal-200 group-hover:bg-opacity-40">
+            <button
+              onMouseEnter={() => handleMouseEnter(1)}
+              onMouseLeave={handleMouseLeave}
+              onClick={() => handleNavigate('/ProductsDetails')}
+              className="px-8 py-4 bg-teal-500 text-white text-lg rounded-md hover:bg-green-400 transition duration-300"
+            >
+              {hoveredButton === 1 ? 'Show Product' : 'Outdoor Floors'}
+            </button>
           </div>
         </div>
-
-        <div className="flex flex-col w-screen py-10  lg:py-10 xl:flex-row">
-          <div className="flex w-full justify-center p-4 xl:p-6">
-            <img src="/porcelain4.jpg" className="w-full" alt="" />
-          </div>
-
-          <div className="w-full xl:w-2/3 p-4 xl:p-6 flex flex-col items-center justify-center">
-            <h3 className="text-3xl text-center xl:text-right text-gray-800 font-bold leading-none mb-3">
-              بلاط البورسلين. انطباعات متميزة على الأسطح.
-            </h3>
-            <div className="rtl flex flex-col w-full text-gray-600 text-center xl:text-right mb-4">
-              تخيّل منتجاتك مباشرة في منزلك! اختر بنقرة واحدة السطح الذي ترغب في
-              تصميمه للأرضيات والحوائط. جرّب الآن مصمم الغرفة في
-              Cleopatraceramics.store
-            </div>
-            <div className="flex flex-col w-full justify-center gap-3 sm:flex-row">
-              <Button type="button" title="اكتشف من هنا" variant="btn_green" />
-            </div>
-          </div>
-        </div>
-
-        <div className="rtl flex flex-col w-screen   py-10 lg:py-10 xl:flex-row">
-          <div className="flex w-full justify-center p-4 xl:p-6">
-            <img src="/porcelain4.jpg" className="w-full" alt="" />
-          </div>
-
-          <div className="w-full xl:w-2/3 p-4 xl:p-6 flex flex-col items-center justify-center">
-            <h3 className="text-3xl text-center xl:text-right text-gray-800 font-bold leading-none mb-3">
-              بلاط البورسلين. انطباعات متميزة على الأسطح.
-            </h3>
-            <div className="rtl flex flex-col w-full text-gray-600 text-center xl:text-right mb-4">
-              تخيّل منتجاتك مباشرة في منزلك! اختر بنقرة واحدة السطح الذي ترغب في
-              تصميمه للأرضيات والحوائط. جرّب الآن مصمم الغرفة في
-              Cleopatraceramics.store
-            </div>
-            <div className="flex flex-col w-full justify-center gap-3 sm:flex-row">
-              <Button type="button" title="اكتشف من هنا" variant="btn_green" />
-            </div>
+  
+        {/* Second Image Div with Button */}
+        <div className="relative w-full h-full bg-gray-200 rounded-lg overflow-hidden group">
+          <Image
+            src="/ceramic1.jpg"
+            alt="Porcelain 1"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg transition duration-300 ease-in-out group-hover:opacity-75"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center transition duration-300 ease-in-out  group-hover:bg-teal-200 group-hover:bg-opacity-40">
+            <button
+              onMouseEnter={() => handleMouseEnter(2)}
+              onMouseLeave={handleMouseLeave}
+              onClick={() => handleNavigate('/PorcelainDetails')}
+              className="px-8 py-4 bg-teal-500 text-white text-lg rounded-md hover:bg-green-400 transition duration-300"
+            >
+              {hoveredButton === 2 ? 'Show Product' : 'Outdoor Walls'}
+            </button>
           </div>
         </div>
-
-
-      </div>
-    </section>
-  );
-};
-export default Guid;
+  
+        {/* Third Image Div with Button */}
+        <div className="relative w-full h-full bg-gray-200 rounded-lg overflow-hidden group">
+          <Image
+            src="/ceramic2.jpg"
+            alt="Ceramic 2"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg transition duration-300 ease-in-out group-hover:opacity-75"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center transition duration-300 ease-in-out  group-hover:bg-teal-200 group-hover:bg-opacity-40">
+            <button
+              onMouseEnter={() => handleMouseEnter(3)}
+              onMouseLeave={handleMouseLeave}
+              onClick={() => handleNavigate('/ProductsDetails')}
+              className="px-8 py-4 bg-teal-500 text-white text-lg rounded-md hover:bg-green-400 transition duration-300"
+            >
+              {hoveredButton === 3 ? 'Show Product' : 'Doors'}
+            </button>
+          </div>
+        </div>
+  
+        {/* Fourth Image Div with Button */}
+        <div className="relative w-full h-full bg-gray-200 rounded-lg overflow-hidden group">
+          <Image
+            src="/ceramic3.jpg"
+            alt="Porcelain 2"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg transition duration-300 ease-in-out group-hover:opacity-75"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center transition duration-300 ease-in-out  group-hover:bg-teal-200 group-hover:bg-opacity-40">
+            <button
+              onMouseEnter={() => handleMouseEnter(4)}
+              onMouseLeave={handleMouseLeave}
+              onClick={() => handleNavigate('/ProductsDetails')}
+              className="px-8 py-4 bg-teal-500 text-white text-lg rounded-md hover:bg-green-400 transition duration-300"
+            >
+              {hoveredButton === 4 ? 'Show Product' : 'Walls'}
+            </button>
+          </div>
+        </div>
+      </div>      );
+    }
+    
