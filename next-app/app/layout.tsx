@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>{/* <title>{metadata.title}</title> */}</head>
       <body>
-        {/* <Navbar /> */}
+        <Navbar />
         {children}
         <Footer />
       </body>

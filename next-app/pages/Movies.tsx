@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <RootLayout>
       <div className="flex flex-col  justify-around items-center bg-red-500 w-full py-5">
-        <h2 className="text-2xl font-bold mb-4">Pokemon List</h2>
+        {/* <h2 className="text-2xl font-bold mb-4">Pokemon List</h2> */}
         <div
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 grid-center 
          gap-10 justify-around"

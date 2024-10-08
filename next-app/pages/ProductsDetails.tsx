@@ -1125,7 +1125,7 @@ const ProductsDetails: React.FC = () => {
 
   return (
     <RootLayout>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50 p-8">
         {/* Filter Sidebar */}
         <aside className="w-full lg:w-1/4 mb-8 lg:mb-0 mr-8">

@@ -125,9 +125,6 @@ const Carousel: React.FC = () => {
   return (
     <div className="relative h-full bg-slate-400">
       {/* Navbar embedded on top of the carousel */}
-      <div className="absolute top-0 left-0 right-0 z-20">
-        <Navbar />
-      </div>
 
       {/* Carousel wrapper */}
       <div className="relative h-screen overflow-hidden bg-slate-400 rounded-lg">

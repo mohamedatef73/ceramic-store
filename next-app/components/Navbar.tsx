@@ -1,3 +1,4 @@
+
 // // import React, { useState } from "react";
 // // import Image from "next/image";
 // // import Link from "next/link";
@@ -438,235 +439,168 @@
 
 // export default Navbar;// components/Navbar.tsx
 
+// components/Navbar.js
 'use client'; // Ensure this is a client component
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiMenu, FiX, FiShoppingCart, FiUser, FiChevronDown, FiSearch, FiSun, FiMoon } from 'react-icons/fi';
-import { IconContext } from 'react-icons';
-import { Transition } from '@headlessui/react';
-import router, { useRouter } from 'next/router';
+import {
+  FiMenu,
+  FiX,
+  FiShoppingCart,
+  FiUser,
+  FiSun,
+  FiMoon,
+} from 'react-icons/fi';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [darkMode, setDarkMode] = useState(false);
-  // const router = useRouter();
 
   // Toggle mobile menu
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  // Handle scroll to show/hide navbar
-  const handleScroll = () => {
-    if (typeof window !== 'undefined') {
-      const scrollY = window.scrollY;
-
-      if (scrollY > lastScrollY && scrollY > 70) {
-        setShowNavbar(false); // Scrolling down
-      } else {
-        setShowNavbar(true); // Scrolling up
-      }
-
-      setLastScrollY(scrollY);
-    }
-  };
-
-  useEffect(() => {
-    // Event listener for scroll
-    window.addEventListener('scroll', handleScroll);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [lastScrollY]);
 
   // Handle dark mode toggle
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     if (!darkMode) {
       document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
   };
 
-  // Close mobile menu on route change
+  // Close mobile menu when a link is clicked
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
+  };
+
+  // Initialize dark mode based on user's preference or system settings
   useEffect(() => {
-    const handleRouteChange = () => {
-      setIsMenuOpen(false);
-    };
-    router.events.on('routeChangeStart', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChange);
-    };
-  }, [event]);
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setDarkMode(false);
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
 
   return (
-    <IconContext.Provider value={{ size: '1.5em' }}>
-      <nav
-        className={`fixed top-0 left-0 w-full bg-white dark:bg-gray-800 shadow-md z-50 transition-transform duration-300 ${
-          showNavbar ? 'translate-y-0' : '-translate-y-full'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
+    <nav className="bg-white dark:bg-gray-800 shadow fixed w-full z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
           {/* Logo */}
-          <Link href="/" aria-label="Home">
-            <Image src="/ccg.png" alt="logo" width={150} height={50} />
-          </Link>
-
-          {/* Desktop Menu */}
-          <ul className="hidden lg:flex space-x-8 items-center">
-            <li className="relative group">
-              <Link href="/" className="text-gray-700 dark:text-gray-200 hover:text-teal-500 font-medium">
-                Home
-              </Link>
-            </li>
-            <li className="relative group">
-              <Link href="/porcelain" className="text-gray-700 dark:text-gray-200 hover:text-teal-500 font-medium">
-                Porcelain
-              </Link>
-            </li>
-            <li className="relative group">
-              <Link href="/porcelainProducts" className="text-gray-700 dark:text-gray-200 hover:text-teal-500 font-medium">
-                Ceramic
-              </Link>
-            </li>
-            <li className="relative group">
-              <Link href="/movies" className="text-gray-700 dark:text-gray-200 hover:text-teal-500 font-medium">
-                Movies
-              </Link>
-            </li>
-            {/* Add more navigation links as needed */}
-          </ul>
-
-          {/* Right Section: Icons */}
-          <div className="hidden lg:flex items-center space-x-4">
-            {/* Search Bar */}
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="hidden sm:block pl-3 pr-10 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
-              />
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <FiSearch className="text-gray-400" />
-              </div>
-            </div>
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className="text-gray-700 dark:text-gray-200 hover:text-teal-500 focus:outline-none"
-              aria-label="Toggle Dark Mode"
-            >
-              {darkMode ? <FiSun /> : <FiMoon />}
-            </button>
-            {/* Shopping Cart */}
-            <Link href="/cart" aria-label="Cart">
-              <FiShoppingCart className="text-gray-700 dark:text-gray-200 hover:text-teal-500" />
-            </Link>
-            {/* User Profile */}
-            <Link href="/profile" aria-label="User Profile">
-              <FiUser className="text-gray-700 dark:text-gray-200 hover:text-teal-500" />
-            </Link>
-            {/* Social Media Icons */}
-            <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <Image src="/facebook.svg" alt="Facebook" width={24} height={24} className="w-6 h-6" />
-            </Link>
-            <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Image src="/instagram.svg" alt="Instagram" width={24} height={24} className="w-6 h-6" />
+          <div className="flex-shrink-0 flex items-center">
+            <Link href="/" aria-label="Home">
+              {/* Replace with your logo image or text */}
+              <Image src="/ccg.png" alt="Logo" width={120} height={40} />
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden flex items-center justify-center text-gray-700 dark:text-gray-200 hover:text-teal-500 focus:outline-none"
-            onClick={toggleMenu}
-            aria-label="Toggle Menu"
-            aria-expanded={isMenuOpen ? 'true' : 'false'}
-          >
-            {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-          </button>
-        </div>
+          {/* Desktop Menu */}
+          <div className="hidden md:flex md:items-center">
+            <Link
+              href="/"
+              className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-teal-500"
+            >
+              Home
+            </Link>
+            <Link
+              href="/ProductsDetails"
+              className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-teal-500"
+            >
+              Products
+            </Link>
+            <Link
+              href="/Movies"
+              className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-teal-500"
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-teal-500"
+            >
+              Contact
+            </Link>
+          </div>
 
-        {/* Mobile Menu */}
-        <Transition
-          show={isMenuOpen}
-          enter="transition ease-out duration-200 transform"
-          enterFrom="opacity-0 translate-x-full"
-          enterTo="opacity-100 translate-x-0"
-          leave="transition ease-in duration-150 transform"
-          leaveFrom="opacity-100 translate-x-0"
-          leaveTo="opacity-0 translate-x-full"
-        >
-          {(ref) => (
-            <div ref={ref} className="lg:hidden fixed top-0 right-0 w-3/4 max-w-sm h-full bg-white dark:bg-white  z-50">
-              <div className="flex flex-col items-start p-4 space-y-4">
-                {/* Close Button */}
-                <button
-                  onClick={toggleMenu}
-                  className="self-end text-gray-700 dark:text-gray-200 hover:text-teal-500 focus:outline-none"
-                  aria-label="Close Menu"
-                >
-                  <FiX size={24} />
-                </button>
-                {/* Navigation Links */}
-                <Link href="/" className="w-full text-gray-700 dark:text-gray-200 hover:text-teal-500 font-medium" onClick={toggleMenu}>
-                  Home
-                </Link>
-                <Link href="/porcelain" className="w-full text-gray-700 dark:text-gray-200 hover:text-teal-500 font-medium" onClick={toggleMenu}>
-                  Porcelain
-                </Link>
-                <Link href="/porcelainProducts" className="w-full text-gray-700 dark:text-gray-200 hover:text-teal-500 font-medium" onClick={toggleMenu}>
-                  Ceramic
-                </Link>
-                <Link href="/movies" className="w-full text-gray-700 dark:text-gray-200 hover:text-teal-500 font-medium" onClick={toggleMenu}>
-                  Movies
-                </Link>
-                {/* Add more navigation links as needed */}
-                {/* Search Bar */}
-                <div className="relative w-full">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    className="w-full pl-3 pr-10 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
-                  />
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                    <FiSearch className="text-gray-400" />
-                  </div>
-                </div>
-                {/* Dark Mode Toggle */}
-                <button
-                  onClick={toggleDarkMode}
-                  className="flex items-center text-gray-700 dark:text-gray-200 hover:text-teal-500 focus:outline-none"
-                  aria-label="Toggle Dark Mode"
-                >
-                  {darkMode ? <FiSun /> : <FiMoon />}
-                  <span className="ml-2 text-sm">Dark Mode</span>
-                </button>
-                {/* Icons */}
-                <div className="flex space-x-4 mt-4">
-                  <Link href="/cart" aria-label="Cart" onClick={toggleMenu}>
-                    <FiShoppingCart className="text-gray-700 dark:text-gray-200 hover:text-teal-500" size={24} />
-                  </Link>
-                  <Link href="/profile" aria-label="User Profile" onClick={toggleMenu}>
-                    <FiUser className="text-gray-700 dark:text-gray-200 hover:text-teal-500" size={24} />
-                  </Link>
-                  <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                    <Image src="/facebook.svg" alt="Facebook" width={24} height={24} className="w-6 h-6" />
-                  </Link>
-                  <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                    <Image src="/instagram.svg" alt="Instagram" width={24} height={24} className="w-6 h-6" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          )}
-        </Transition>
-      </nav>
-    </IconContext.Provider>
+          {/* Right Section: Icons */}
+          <div className="flex items-center">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-md text-gray-700 dark:text-gray-200 hover:text-teal-500 focus:outline-none"
+              aria-label="Toggle Dark Mode"
+            >
+              {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+            </button>
+
+            {/* Shopping Cart */}
+            <Link href="/cart" className="ml-4 text-gray-700 dark:text-gray-200 hover:text-teal-500" aria-label="Cart">
+              <FiShoppingCart size={20} />
+            </Link>
+
+            {/* User Profile */}
+            <Link href="/profile" className="ml-4 text-gray-700 dark:text-gray-200 hover:text-teal-500" aria-label="User Profile">
+              <FiUser size={20} />
+            </Link>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMenu}
+              className="md:hidden ml-4 p-2 rounded-md text-gray-700 dark:text-gray-200 hover:text-teal-500 focus:outline-none"
+              aria-label="Toggle Menu"
+              aria-expanded={isMenuOpen ? 'true' : 'false'}
+            >
+              {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-white dark:bg-gray-800">
+          <Link
+            href="/"
+            onClick={handleLinkClick}
+            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
+            Home
+          </Link>
+          <Link
+            href="/products"
+            onClick={handleLinkClick}
+            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
+            Products
+          </Link>
+          <Link
+            href="/about"
+            onClick={handleLinkClick}
+            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
+            About
+          </Link>
+          <Link
+            href="/contact"
+            onClick={handleLinkClick}
+            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
+            Contact
+          </Link>
+        </div>
+      )}
+    </nav>
   );
 };
 
