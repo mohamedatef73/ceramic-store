@@ -1064,7 +1064,7 @@ const ProductsDetails: React.FC = () => {
   ];
 
   // Handler for React Select changes
-  const handleSelectChange = (filterType: string, selectedOptions: any[] | MultiValue<{ value: string; label: string; }>) => {
+  const handleSelectChange = (filterType: string , selectedOptions: any[] | MultiValue<{ value: string; label: string; }>) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [filterType]: selectedOptions ? selectedOptions.map(option => option.value) : [],
@@ -1072,31 +1072,57 @@ const ProductsDetails: React.FC = () => {
   };
 
   // Function to filter products based on selected filters
-  const getFilteredProducts = () => {
+  // const getFilteredProducts = () => {
+  //   return products.filter((product) => {
+  //     // Filter by Type
+  //     if (filters.type.length > 0 && !filters.type.includes(product.type)) {
+  //       return false;
+  //     }
+
+  //     // Filter by Size
+  //     if (filters.size.length > 0 && !filters.size.includes(product.size)) {
+  //       return false;
+  //     }
+
+  //     // Filter by Color
+  //     if (filters.color.length > 0 && !filters.color.includes(product.color)) {
+  //       return false;
+  //     }
+
+  //     // Filter by Price
+  //     if (product.price < filters.price[0] || product.price > filters.price[1]) {
+  //       return false;
+  //     }
+
+  //     return true;
+  //   });
+  // };
+  const getFilteredProducts = (): Product[] => {
     return products.filter((product) => {
       // Filter by Type
       if (filters.type.length > 0 && !filters.type.includes(product.type)) {
         return false;
       }
-
+  
       // Filter by Size
       if (filters.size.length > 0 && !filters.size.includes(product.size)) {
         return false;
       }
-
+  
       // Filter by Color
       if (filters.color.length > 0 && !filters.color.includes(product.color)) {
         return false;
       }
-
+  
       // Filter by Price
       if (product.price < filters.price[0] || product.price > filters.price[1]) {
         return false;
       }
-
+  
       return true;
     });
   };
+  
 
   const filteredProducts = getFilteredProducts();
 
@@ -1109,11 +1135,11 @@ const ProductsDetails: React.FC = () => {
   ];
 
   const sizeOptions = [
-    { value: '20x20', label: '20x20 cm' },
-    { value: '30x30', label: '30x30 cm' },
-    { value: '40x40', label: '40x40 cm' },
-    { value: '50x50', label: '50x50 cm' },
-    { value: '60x60', label: '60x60 cm' },
+    { value: '20x20', label: '20x20' },
+    { value: '30x30', label: '30x30' },
+    { value: '40x40', label: '40x40' },
+    { value: '50x50', label: '50x50' },
+    { value: '60x60', label: '60x60' },
   ];
 
   const colorOptions = [
