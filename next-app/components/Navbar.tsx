@@ -523,13 +523,13 @@ const Navbar = () => {
               href="/Movies"
               className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-teal-500"
             >
-              About
+              movies box office
             </Link>
             <Link
-              href="/contact"
+              href="/ContactUs"
               className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-teal-500"
             >
-              Contact
+              Contact us
             </Link>
           </div>
 
@@ -545,12 +545,12 @@ const Navbar = () => {
             </button>
 
             {/* Shopping Cart */}
-            <Link href="/cart" className="ml-4 text-gray-700 dark:text-gray-200 hover:text-teal-500" aria-label="Cart">
+            <Link href="/CartPage" className="ml-4 text-gray-700 dark:text-gray-200 hover:text-teal-500" aria-label="Cart">
               <FiShoppingCart size={20} />
             </Link>
 
             {/* User Profile */}
-            <Link href="/profile" className="ml-4 text-gray-700 dark:text-gray-200 hover:text-teal-500" aria-label="User Profile">
+            <Link href="/LoginPage" className="ml-4 text-gray-700 dark:text-gray-200 hover:text-teal-500" aria-label="User Profile">
               <FiUser size={20} />
             </Link>
 
@@ -578,25 +578,25 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            href="/products"
+            href="/ProductsDetails"
             onClick={handleLinkClick}
             className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             Products
           </Link>
           <Link
-            href="/about"
+            href="/Movies"
             onClick={handleLinkClick}
             className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
-            About
+            Movies Box Office
           </Link>
           <Link
-            href="/contact"
+            href="/ContactUs"
             onClick={handleLinkClick}
             className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
-            Contact
+            Contact us
           </Link>
         </div>
       )}

@@ -57,7 +57,7 @@ export default function Home() {
           {movies.map((movie) => (
             <Card
               key={movie.id}
-              className="flex-shrink-0 bg-white border border-gray-200 rounded-lg w-96 shadow-md"
+              className="flex-shrink-0 bg-white border mt-20 border-gray-200 rounded-lg w-96 shadow-md"
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

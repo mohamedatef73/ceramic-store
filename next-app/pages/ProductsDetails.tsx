@@ -1128,7 +1128,7 @@ const ProductsDetails: React.FC = () => {
       {/* <Navbar /> */}
       <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50 p-8">
         {/* Filter Sidebar */}
-        <aside className="w-full lg:w-1/4 mb-8 lg:mb-0 mr-8">
+        <aside className="w-full mt-20 lg:w-1/4 mb-8 lg:mb-0 mr-8">
           <div className="p-4 bg-white rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-6">Filter Products</h2>
 
@@ -1224,7 +1224,7 @@ const ProductsDetails: React.FC = () => {
         </aside>
 
         {/* Product Display Area */}
-        <main className="w-full lg:w-3/4">
+        <main className="w-full mt-20 lg:w-3/4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
