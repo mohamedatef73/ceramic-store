@@ -1064,7 +1064,7 @@ const ProductsDetails: React.FC = () => {
   ];
 
   // Handler for React Select changes
-  const handleSelectChange = (filterType: string , selectedOptions: any[] | MultiValue<{ value: string; label: string; }>) => {
+  const handleSelectChange = (filterType: string , selectedOptions: any[] | MultiValue<{ value: never; label: never; }>) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [filterType]: selectedOptions ? selectedOptions.map(option => option.value) : [],
@@ -1097,7 +1097,7 @@ const ProductsDetails: React.FC = () => {
   //     return true;
   //   });
   // };
-  const getFilteredProducts = (): Product[] => {
+  const getFilteredProducts = () => {
     return products.filter((product) => {
       // Filter by Type
       if (filters.type.length > 0 && !filters.type.includes(product.type)) {
