@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
@@ -11,10 +11,10 @@ export default function Home() {
   const handleNavigate = (route: string) => {
     router.push(route);
   };
-  const [hoveredButton, setHoveredButton] = useState(null);
+  const [hoveredButton, setHoveredButton] = useState<number | null>(null);
     
-  const handleMouseEnter = (buttonId) => {
-    setHoveredButton(buttonId);
+  const handleMouseEnter = () => {
+    setHoveredButton(null);
   };
 
   const handleMouseLeave = () => {
@@ -36,7 +36,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center transition duration-300 ease-in-out group-hover:bg-teal-200 group-hover:bg-opacity-40">
             <button
-              onMouseEnter={() => handleMouseEnter(1)}
+              onMouseEnter={() => handleMouseEnter()}
               onMouseLeave={handleMouseLeave}
               onClick={() => handleNavigate('/ProductsDetails')}
               className="px-8 py-4 bg-teal-500 text-white text-lg rounded-md hover:bg-green-400 transition duration-300"
@@ -57,7 +57,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center transition duration-300 ease-in-out  group-hover:bg-teal-200 group-hover:bg-opacity-40">
             <button
-              onMouseEnter={() => handleMouseEnter(2)}
+              onMouseEnter={() => handleMouseEnter()}
               onMouseLeave={handleMouseLeave}
               onClick={() => handleNavigate('/PorcelainDetails')}
               className="px-8 py-4 bg-teal-500 text-white text-lg rounded-md hover:bg-green-400 transition duration-300"
@@ -78,7 +78,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center transition duration-300 ease-in-out  group-hover:bg-teal-200 group-hover:bg-opacity-40">
             <button
-              onMouseEnter={() => handleMouseEnter(3)}
+              onMouseEnter={() => handleMouseEnter()}
               onMouseLeave={handleMouseLeave}
               onClick={() => handleNavigate('/ProductsDetails')}
               className="px-8 py-4 bg-teal-500 text-white text-lg rounded-md hover:bg-green-400 transition duration-300"
@@ -99,7 +99,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center transition duration-300 ease-in-out  group-hover:bg-teal-200 group-hover:bg-opacity-40">
             <button
-              onMouseEnter={() => handleMouseEnter(4)}
+              onMouseEnter={() => handleMouseEnter()}
               onMouseLeave={handleMouseLeave}
               onClick={() => handleNavigate('/ProductsDetails')}
               className="px-8 py-4 bg-teal-500 text-white text-lg rounded-md hover:bg-green-400 transition duration-300"
