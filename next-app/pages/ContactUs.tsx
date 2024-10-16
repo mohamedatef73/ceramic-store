@@ -32,7 +32,7 @@ export default function Contact() {
               />
             </div>
 
-            <div>
+            {/* <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
               <textarea
                 id="message"
@@ -40,7 +40,7 @@ export default function Contact() {
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 placeholder="Your message"
               ></textarea>
-            </div>
+            </div> */}
 
             <div>
               <button
