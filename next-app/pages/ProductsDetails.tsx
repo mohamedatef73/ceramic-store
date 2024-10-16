@@ -3,26 +3,38 @@ import { useState } from 'react';
 import Navbar from "../components/Navbar";
 import Select, { MultiValue } from 'react-select';
 
+interface Product {
+  id: number;
+  title: string;
+  image: string;
+  description: string;
+  price: number;
+  color: string;
+  size: string;
+  type: string;
+}
+
 const ProductsDetails: React.FC = () => {
   // State to manage selected filters
   const [filters, setFilters] = useState({
-    type: String,
-    size:String,
-    color: String,
-    price: Number, // Initialize price range (min, max)
+    type: [] as string[],
+    size: [] as string[],
+    color: [] as string[],
+    price: [0, 100], // Initialize price range (min, max)
   });
 
   // Sample products data
-  const products = [
+  const products: Product[] = [
+    // Ensure all products have unique IDs and consistent casing
     {
       id: 1,
       title: 'Handcrafted Ceramic Vase',
       image: '/porcelain2.jpg',
       description: 'A beautiful handcrafted vase made from fine ceramic.',
-      price: 49.99, // Ensure price is a number
+      price: 49.99,
       color: 'Blue',
-      size: '30x30', // Added size
-      type: 'Door',   // Added type
+      size: '30x30',
+      type: 'Door',
     },
     {
       id: 2,
@@ -31,89 +43,81 @@ const ProductsDetails: React.FC = () => {
       description: 'A simple yet elegant ceramic mug for your coffee.',
       price: 19.99,
       color: 'White',
-      size: '20x20', // Added size
-      type: 'Floor',    // Added type
+      size: '20x20',
+      type: 'Floor',
     },
     {
       id: 3,
-      title: 'Elegant Ceramic Tile',
-      image: '/ceramic2.jpg',
-      description: 'A beautiful ceramic tile suitable for flooring.',
-      price: 29.99,
-      color: 'Beige',
-      size: '60x60', // Added size
-      type: 'Outdoor floor',   // Added type
+      title: 'Minimalist Ceramic Mug',
+      image: '/porcelain2.jpg',
+      description: 'A simple yet elegant ceramic mug for your coffee.',
+      price: 19.99,
+      color: 'blue',
+      size: '30x30',
+      type: 'door',
     },
     {
       id: 4,
-      title: 'Decorative Ceramic Plate',
-      image: '/ceramic2.jpg',
-      description: 'A decorative plate for your dining table.',
-      price: 39.99,
-      color: 'white',
-      size: '40x40', // Added size
-      type: 'Floor',  // Added type
+      title: 'Minimalist Ceramic Mug',
+      image: '/porcelain3.jpg',
+      description: 'A simple yet elegant ceramic mug for your coffee.',
+      price: 80,
+      color: 'red',
+      size: '40x40',
+      type: 'Outdoor Walls',
     },
     {
       id: 5,
-      title: 'Decorative Ceramic Plate',
-      image: '/ceramic3.jpg',
-      description: 'A decorative plate for your dining table.',
-      price: 39.99,
-      color: 'Biege',
-      size: '40x40', // Added size
-      type: 'Door',  // Added type
+      title: 'Minimalist Ceramic Mug',
+      image: '/ceramic1.jpg',
+      description: 'A simple yet elegant ceramic mug for your coffee.',
+      price: 90,
+      color: 'biege',
+      size: '60x60',
+      type: 'Outdoor floor',
     },
     {
       id: 6,
-      title: 'Decorative Ceramic Plate',
-      image: '/ceramic3.jpg',
-      description: 'A decorative plate for your dining table.',
-      price: 39.99,
-      color: 'Black',
-      size: '40x40', // Added size
-      type: 'Outdoor floor',  // Added type
+      title: 'Minimalist Ceramic Mug',
+      image: '/porcelain4.jpg',
+      description: 'A simple yet elegant ceramic mug for your coffee.',
+      price: 50,
+      color: 'white',
+      size: '20x20',
+      type: 'Outdoor Floor',
     },
     {
       id: 7,
-      title: 'Decorative Ceramic Plate',
-      image: '/porcelain5.jpg',
-      description: 'A decorative plate for your dining table.',
-      price: 39.99,
-      color: 'blue',
-      size: '40x40', // Added size
-      type: 'Door',  // Added type
+      title: 'Minimalist Ceramic Mug',
+      image: '/porcelain6.jpg',
+      description: 'A simple yet elegant ceramic mug for your coffee.',
+      price: 100,
+      color: 'red',
+      size: '40x40',
+      type: 'Floor',
     },
     {
       id: 8,
-      title: 'Decorative Ceramic Plate',
-      image: '/porcelain6.jpg',
-      description: 'A decorative plate for your dining table.',
-      price: 39.99,
-      color: 'Black',
-      size: '40x40', // Added size
-      type: 'Floor',  // Added type
+      title: 'Minimalist Ceramic Mug',
+      image: '/ceramic1.jpg',
+      description: 'A simple yet elegant ceramic mug for your coffee.',
+      price: 19.99,
+      color: 'White',
+      size: '20x20',
+      type: 'Floor',
     },
     {
       id: 9,
-      title: 'Decorative Ceramic Plate',
-      image: '/porcelain.jpg',
-      description: 'A decorative plate for your dining table.',
-      price: 39.99,
-      color: 'Biege',
-      size: '40x40', // Added size
-      type: 'Door',  // Added type
+      title: 'Minimalist Ceramic Mug',
+      image: '/five.jpg',
+      description: 'A simple yet elegant ceramic mug for your coffee.',
+      price: 19.99,
+      color: 'Beige',
+      size: '20x20',
+      type: 'Door',
     },
-    {
-      id: 9,
-      title: 'Decorative Ceramic Plate',
-      image: '/ceramic.jpg',
-      description: 'A decorative plate for your dining table.',
-      price: 39.99,
-      color: 'Biege',
-      size: '60x60', // Added size
-      type: 'Floor',  // Added type
-    },
+
+    // ... other products with unique IDs
     {
       id: 10,
       title: 'Decorative Ceramic Plate',
@@ -121,15 +125,16 @@ const ProductsDetails: React.FC = () => {
       description: 'A decorative plate for your dining table.',
       price: 39.99,
       color: 'Blue',
-      size: '20x20', // Added size
-      type: 'Floor',  // Added type
+      size: '20x20',
+      type: 'Floor',
     },
-
-    // Add more products...
   ];
 
   // Handler for React Select changes
-  const handleSelectChange = (filterType: string , selectedOptions: any[] | MultiValue<{ value: string; label: string; }>) => {
+  const handleSelectChange = (
+    filterType: keyof typeof filters,
+    selectedOptions: MultiValue<{ value: string; label: string }>
+  ) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [filterType]: selectedOptions ? selectedOptions.map(option => option.value) : [],
@@ -137,57 +142,31 @@ const ProductsDetails: React.FC = () => {
   };
 
   // Function to filter products based on selected filters
-  // const getFilteredProducts = () => {
-  //   return products.filter((product) => {
-  //     // Filter by Type
-  //     if (filters.type.length > 0 && !filters.type.includes(product.type)) {
-  //       return false;
-  //     }
-
-  //     // Filter by Size
-  //     if (filters.size.length > 0 && !filters.size.includes(product.size)) {
-  //       return false;
-  //     }
-
-  //     // Filter by Color
-  //     if (filters.color.length > 0 && !filters.color.includes(product.color)) {
-  //       return false;
-  //     }
-
-  //     // Filter by Price
-  //     if (product.price < filters.price[0] || product.price > filters.price[1]) {
-  //       return false;
-  //     }
-
-  //     return true;
-  //   });
-  // };
   const getFilteredProducts = () => {
     return products.filter((product) => {
       // Filter by Type
-      if (filters.type.length > 0 && !filters.type(product.type)) {
+      if (filters.type.length > 0 && !filters.type.includes(product.type)) {
         return false;
       }
-  
+
       // Filter by Size
-      if (filters.size.length > 0 && !filters.size(product.size)) {
+      if (filters.size.length > 0 && !filters.size.includes(product.size)) {
         return false;
       }
-  
+
       // Filter by Color
-      if (filters.color.length > 0 && !filters.color(product.color)) {
+      if (filters.color.length > 0 && !filters.color.includes(product.color)) {
         return false;
       }
-  
+
       // Filter by Price
-      if (product.price < filters.price.length || product.price > filters.price.length) {
+      if (product.price < filters.price[0] || product.price > filters.price[1]) {
         return false;
       }
-  
+
       return true;
     });
   };
-  
 
   const filteredProducts = getFilteredProducts();
 
@@ -212,6 +191,8 @@ const ProductsDetails: React.FC = () => {
     { value: 'Beige', label: 'Beige' },
     { value: 'Black', label: 'Black' },
     { value: 'Blue', label: 'Blue' },
+    { value: 'Red', label: 'Red' },
+
   ];
 
   return (
@@ -232,7 +213,7 @@ const ProductsDetails: React.FC = () => {
                 id="type"
                 isMulti
                 options={typeOptions}
-                value={typeOptions.filter(option => filters.type(option.value))}
+                value={typeOptions.filter(option => filters.type.includes(option.value))}
                 onChange={(selected) => handleSelectChange('type', selected)}
                 className="react-select-container"
                 classNamePrefix="react-select"
@@ -249,7 +230,7 @@ const ProductsDetails: React.FC = () => {
                 id="size"
                 isMulti
                 options={sizeOptions}
-                value={sizeOptions.filter(option => filters.size(option.value))}
+                value={sizeOptions.filter(option => filters.size.includes(option.value))}
                 onChange={(selected) => handleSelectChange('size', selected)}
                 className="react-select-container"
                 classNamePrefix="react-select"
@@ -266,7 +247,7 @@ const ProductsDetails: React.FC = () => {
                 id="color"
                 isMulti
                 options={colorOptions}
-                value={colorOptions.filter(option => filters.color(option.value))}
+                value={colorOptions.filter(option => filters.color.includes(option.value))}
                 onChange={(selected) => handleSelectChange('color', selected)}
                 className="react-select-container"
                 classNamePrefix="react-select"
@@ -277,36 +258,44 @@ const ProductsDetails: React.FC = () => {
             {/* Price Filter */}
             <div className="mb-6">
               <label className="block text-xl font-semibold mb-2">Price Range</label>
-              {/* <input
-                type="range"
-                min="0"
-                max="100" // Set max based on your product price range
-                value={filters.price.length}
-                onChange={(e) => {
-                  const newPriceRange = [parseFloat(e.target.value), filters.price.length];
-                  setFilters;
-                }}
-                className="w-full"
-              />
-              <input
-                type="range"
-                min="0"
-                max="100" // Set max based on your product price range
-                value={filters.price[1]}
-                onChange={(e) => {
-                  const newPriceRange = [filters.price[0], parseFloat(e.target.value)];
-                  setFilters((prev) => ({ ...prev, price: newPriceRange }));
-                }}
-                className="w-full"
-              />
+              <div className="flex items-center space-x-4">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={filters.price[0]}
+                  onChange={(e) => {
+                    const newMin = parseFloat(e.target.value);
+                    setFilters((prev) => ({
+                      ...prev,
+                      price: [newMin, prev.price[1]],
+                    }));
+                  }}
+                  className="w-full"
+                />
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={filters.price[1]}
+                  onChange={(e) => {
+                    const newMax = parseFloat(e.target.value);
+                    setFilters((prev) => ({
+                      ...prev,
+                      price: [prev.price[0], newMax],
+                    }));
+                  }}
+                  className="w-full"
+                />
+              </div>
               <div>
                 Price: ${filters.price[0]} - ${filters.price[1]}
               </div>
-            </div> */}
+            </div>
 
             {/* Reset Filters Button */}
             <button
-              onClick={() => setFilters({ type: [], size: [], color: [], price: [0, 100] })} // Reset price to default range
+              onClick={() => setFilters({ type: [], size: [], color: [], price: [0, 100] })}
               className="w-full mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition duration-300"
             >
               Reset Filters
