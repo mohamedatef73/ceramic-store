@@ -1,6 +1,5 @@
 import RootLayout from "../app/layout";
 import { useState } from 'react';
-import Navbar from "../components/Navbar";
 import Select, { MultiValue } from 'react-select';
 
 interface Product {
