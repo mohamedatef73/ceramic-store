@@ -321,6 +321,12 @@ const ProductsDetails: React.FC = () => {
                     <p className="text-sm text-gray-500">Size: {product.size}</p>
                     <p className="text-sm text-gray-500">Color: {product.color}</p>
                     <p className="text-sm text-gray-500">Type: {product.type}</p>
+ <button
+                      onClick={() => addToCart(product)}
+                      className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               ))
