@@ -59,7 +59,7 @@ export default function Home() {
             <button
               onMouseEnter={() => handleMouseEnter()}
               onMouseLeave={handleMouseLeave}
-              onClick={() => handleNavigate('/PorcelainDetails')}
+              onClick={() => handleNavigate('/ProductsDetails')}
               className="px-8 py-4 bg-teal-500 text-white text-lg rounded-md hover:bg-green-400 transition duration-300"
             >
               {hoveredButton === 2 ? 'Show Product' : 'Outdoor Walls'}
