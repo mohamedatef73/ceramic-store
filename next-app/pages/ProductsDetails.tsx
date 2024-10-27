@@ -1,5 +1,5 @@
 import RootLayout from "../app/layout";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Select, { MultiValue } from 'react-select';
 
 interface Product {
@@ -193,6 +193,20 @@ const ProductsDetails: React.FC = () => {
     { value: 'Red', label: 'Red' },
 
   ];
+
+  import { useEffect } from 'react';
+
+useEffect(() => {
+  const storedCart = localStorage.getItem('cartItems');
+  if (storedCart) {
+    setCartItems(JSON.parse(storedCart));
+  }
+}, []);
+
+useEffect(() => {
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+}, [cartItems]);
+
 
   return (
     <RootLayout>
