@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useCart } from './cartContext'; // Import your cart context
+import { useCart } from '../pages/api/CartContext'; // Import your cart context
 
 export default function Home() {
   const router = useRouter();
@@ -58,7 +58,10 @@ export default function Home() {
           <div className="absolute bottom-0 left-0 p-4">
             <button
               onClick={() =>
-                addToCart({ id: product.id, name: product.name, price: product.price, image: product.image })
+                addToCart({
+                  id: product.id, name: product.name, price: product.price, image: product.image,
+                  quantity: 0
+                })
               }
               className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition"
             >

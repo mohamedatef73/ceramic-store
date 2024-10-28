@@ -12,7 +12,7 @@ export default function Home() {
       <Heros />
       <Camp />
       <Guid />
-      <CardProducts/>
+      {/* <CardProducts/> */}
 
     </>
   );

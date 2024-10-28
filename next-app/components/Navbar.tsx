@@ -299,19 +299,19 @@ const Navbar = () => {
             <FiHome size={24} />
             <span className="block text-sm">Home</span>
           </Link>
-          <Link href="/shop" className="text-gray-700 dark:text-gray-200 hover:text-teal-500">
+          <Link href="/ProductsDetails" className="text-gray-700 dark:text-gray-200 hover:text-teal-500">
             <FiShoppingCart size={24} />
             <span className="block text-sm">Shop</span>
           </Link>
-          <Link href="/contact" className="text-gray-700 dark:text-gray-200 hover:text-teal-500">
+          <Link href="/ContactUs" className="text-gray-700 dark:text-gray-200 hover:text-teal-500">
             <FiPhone size={24} />
             <span className="block text-sm">Contact</span>
           </Link>
-          <Link href="/account" className="text-gray-700 dark:text-gray-200 hover:text-teal-500">
+          <Link href="/LoginPage" className="text-gray-700 dark:text-gray-200 hover:text-teal-500">
             <FiUser size={24} />
             <span className="block text-sm">Account</span>
           </Link>
-          <Link href="/account" className="text-gray-700 dark:text-gray-200 hover:text-teal-500">
+          <Link href="/Movies" className="text-gray-700 dark:text-gray-200 hover:text-teal-500">
             <FiMove size={24} />
             <span className="block text-sm">Movies</span>
           </Link>

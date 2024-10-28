@@ -1,58 +1,45 @@
+// pages/AddToCart.tsx
 import React from 'react';
+import { useCart } from './api/CartContext'; // Adjust path if necessary
+import { useRouter } from 'next/router';
 import RootLayout from '../app/layout';
-import { useCart } from './cartContext'; // Import cart context
 
-const CartPage = () => {
-  const { cartItems, removeFromCart } = useCart(); // Access cart items from context
+const AddToCart: React.FC = () => {
+  const { cartItems } = useCart();
+  const router = useRouter();
 
-  const totalAmount = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const handleCheckout = () => {
+    // Redirect to the checkout page or handle checkout logic here
+    router.push('/checkout'); // Change this to your checkout page route
+  };
 
   return (
     <RootLayout>
-      <div className="container mx-auto py-12 px-4 lg:px-8">
-        <h1 className="text-4xl font-bold text-gray-800 mb-8">Your Cart</h1>
+      <div className="p-8">
+        <h1 className="text-3xl font-bold mb-4">Shopping Cart</h1>
         {cartItems.length === 0 ? (
-          <p className="text-gray-500 text-center">Your cart is empty.</p>
+          <p className="text-gray-500">Your cart is empty.</p>
         ) : (
-          <div className="space-y-8">
-            <ul className="space-y-6">
+          <div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {cartItems.map((item) => (
-                <li
-                  key={item.id}
-                  className="flex flex-col lg:flex-row justify-between items-center border-b pb-6"
-                >
-                  <div className="flex items-center space-x-4 w-full lg:w-auto">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-20 h-20 rounded-md shadow-md"
-                    />
-                    <div>
-                      <h2 className="text-xl font-semibold text-gray-800">
-                        {item.name}
-                      </h2>
-                      <p className="text-gray-600">
-                        ${item.price} x {item.quantity} = ${item.price * item.quantity}
-                      </p>
-                    </div>
+                <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />
+                  <div className="p-4">
+                    <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                    <p className="text-gray-600 mb-2">{item.description}</p>
+                    <p className="text-lg font-semibold text-teal-600">
+                      ${item.price.toFixed(2)} x {item.quantity} = ${(item.price * (item.quantity || 1)).toFixed(2)}
+                    </p>
                   </div>
-                  <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-red-500 hover:text-red-700 transition duration-300"
-                  >
-                    Remove
-                  </button>
-                </li>
+                </div>
               ))}
-            </ul>
-            <div className="mt-8 text-right">
-              <h2 className="text-3xl font-bold text-gray-800">
-                Total: ${totalAmount.toFixed(2)}
-              </h2>
-              <button className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">
+            </div>
+            <div className="mt-6">
+              <button
+                onClick={handleCheckout}
+                className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300"
+              >
                 Proceed to Checkout
               </button>
             </div>
@@ -63,4 +50,4 @@ const CartPage = () => {
   );
 };
 
-export default CartPage;
+export default AddToCart;
