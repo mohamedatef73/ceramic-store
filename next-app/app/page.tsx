@@ -1,8 +1,8 @@
 import Camp from "../components/Camp";
-import Guid from "../components/Guid";
+import Guid from "../components/Products";
 import Heros from "../components/Heros";
 import Carousel from "../components/Carousel";
-import CardProducts from "../components/CardProducts"
+import Products from "../components/Products"
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
 
       <Heros />
       <Camp />
-      <Guid />
+      <Products />
       {/* <CardProducts/> */}
 
     </>

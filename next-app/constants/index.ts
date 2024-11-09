@@ -73,3 +73,15 @@ export const SOCIALS = {
   title: "Social",
   links: ["/facebook.svg", "/instagram.svg", "/twitter.svg", "/youtube.svg", "/wordpress.svg"],
 }
+
+// types/Product.ts
+export interface Product {
+  id: number;
+  title: string;
+  image: string;
+  description: string;
+  price: number;
+  color: string;
+  size: string;
+  type: string;
+}
