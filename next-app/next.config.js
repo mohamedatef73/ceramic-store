@@ -1,5 +1,4 @@
-
 // next.config.js
 module.exports = {
-  target: 'serverless', // or remove target for recent Next.js versions
+  // Add any other necessary configuration options here
 };
